@@ -210,18 +210,18 @@ end:
     rjmp end
 
 	button_init:
-		push r16				; Save r16 value in stack
+		push r16			; Save r16 value in stack
 		ldi r16, 0b00000000		; Load 0b00000000 into r16
-        out DDRA, r16			; Set DDRA to r16
-		pop r16					; Return r16 to initial value
+        out DDRA, r16				; Set DDRA to r16
+		pop r16				; Return r16 to initial value
 		ret
 
     subroutine:
 		// Prologue
-		push r16				; Save r16 value in stack
-		push r17				; Save r17 value in stack
-		push r18				; Save r18 value in stack
-		push r24				; Save r24 value in stack
+		push r16			; Save r16 value in stack
+		push r17			; Save r17 value in stack
+		push r18			; Save r18 value in stack
+		push r24			; Save r24 value in stack
 
 		in r28, STACK_L			; Load pointer low to r28
 		in r29, STACK_H			; Load pointer high to r29
@@ -234,9 +234,9 @@ end:
 
 		loop:
 			in r18, PINA		; Load PINA to r18
-			adiw Y, 1			; Add 1 to local pointer (Y)
-			st Y, r18			; Write r18 to address Y
-			dec r24				; Decrement r24
+			adiw Y, 1		; Add 1 to local pointer (Y)
+			st Y, r18		; Write r18 to address Y
+			dec r24			; Decrement r24
 			brne loop
 
 		// Epilogue
@@ -246,10 +246,10 @@ end:
 		out STACK_L, r28		; Set stack low to r28
 		out STACK_H, r29		; Set stack high to r29
 
-		pop r24					; Return r24 to initial value
-		pop r18					; Return r18 to initial value
-		pop r17					; Return r17 to initial value
-		pop r16					; Return r16 to initial value
+		pop r24				; Return r24 to initial value
+		pop r18				; Return r18 to initial value
+		pop r17				; Return r17 to initial value
+		pop r16				; Return r16 to initial value
 ```
 
 **Lab question 3 - What happens if we do not return the allocated memory in the subroutine**
@@ -321,27 +321,27 @@ ret
 
 check_button:
 	in r18, PINA			; Load PINA value to r18
-	ldi r19, 1				; Load a one to r19
-	lsr r18					; Right shift r18
+	ldi r19, 1			; Load a one to r19
+	lsr r18				; Right shift r18
 
 	loop_btn:
-		lsr r18				; Right shift r18
-		dec r24				; Decrement r24 (the passed argument)
+		lsr r18			; Right shift r18
+		dec r24			; Decrement r24 (the passed argument)
 		brne loop_btn
 
-	and r18, r19				; r18 = r18 & r19
-	cpi r18, 1				; Compare r18 and 1
+	and r18, r19			; r18 = r18 & r19
+	cpi r18, 1			; Compare r18 and 1
 	breq pressed			; Branch to pressed if equal
 
-	ldi r24, 0				; Return 0
+	ldi r24, 0			; Return 0
 	ret
 
 	pressed:
-		ldi r24, 1			; Return 1
+		ldi r24, 1		; Return 1
 		ret
 ```
 
-```
+```c
 #define F_CPU 16000000UL
 
 #include <avr/io.h>
