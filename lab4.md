@@ -103,8 +103,8 @@ See question 2
 
 **Home assignment 3 - Look on page 13 in the datasheet to see which PCINT (Pin Change Interrupt) the sensors are connected.**
 
-PC6: PCINT22
-PC7: PCINT23
+- PC6: PCINT22
+- PC7: PCINT23
 
 **Home assignment 4 - Write code that enables the correct Pin Change Interrupt in the corresponding Pin Change Mask Register, PCMSK**
 
@@ -115,7 +115,7 @@ PC7: PCINT23
 `PCICR |= 1<<PCIE2`
 
 **Test interrupt service**
-```
+```c
 #include <avr/interrupt.h>
 
 volatile uint8_t counter = 0;
@@ -144,7 +144,7 @@ ISR(PCINT2_vect)
 **Lab question 5 - What is the value of the variable?**
 
 **Final Code**
-```
+```c
 #include <avr/interrupt.h>
 #include <avr/io.h>
 #include <stdint.h>
